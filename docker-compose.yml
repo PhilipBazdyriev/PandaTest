@@ -1,8 +1,5 @@
-version: '3'
-
 networks:
   laravel:
-
 
 services:
   app:
@@ -31,14 +28,16 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: homestead
-      MYSQL_USER: homestead
+      MYSQL_DATABASE: pandatest
+      MYSQL_USER: panda
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     networks:
       - laravel
+    volumes:
+      - ./mysql:/var/lib/mysql
 
   php:
     build:
