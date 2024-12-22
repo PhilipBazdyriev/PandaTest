@@ -13,15 +13,13 @@ class OlxProduct extends Model
         'name',
         'image',
         'description',
-        'priceCurrency',
+        'price_currency',
         'price',
-        'lastRefreshTime',
     ];
 
     protected $casts = [
         'sku' => 'integer',
         'price' => 'integer',
-        'lastRefreshTime' => 'datetime',
     ];
 
     public function setPriceCurrencyAttribute($value)
@@ -30,12 +28,17 @@ class OlxProduct extends Model
             throw new \InvalidArgumentException('Price currency must be exactly 3 characters.');
         }
 
-        $this->attributes['priceCurrency'] = strtoupper($value);
+        $this->attributes['price_currency'] = strtoupper($value);
     }
 
     public static function existsBySku($sku)
     {
         return self::where('sku', $sku)->exists();
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(UserOlxProductSubscription::class);
     }
 
 }

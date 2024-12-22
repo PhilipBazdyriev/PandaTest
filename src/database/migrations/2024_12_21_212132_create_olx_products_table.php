@@ -11,8 +11,8 @@ return new class extends Migration
     {
         Schema::create('olx_products', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('sku')->unique(); // Унікальний SKU
-            $table->string('url')->unique(); // Унікальний URL
+            $table->bigInteger('sku')->unique();
+            $table->string('url')->unique();
             $table->string('name');
             $table->string('image');
             $table->text('description')->nullable();

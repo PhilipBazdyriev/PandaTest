@@ -22,18 +22,17 @@ class OlxTrackingController extends Controller
         $userEmail = $request->post('userEmail');
 
         try {
-            $this->olxService->subscribeUserToTracking($productUrl, $userEmail);
+            $subscriptionId = $this->olxService->subscribeUserToTracking($productUrl, $userEmail);
+            return response()->json([
+                'status' => 'ok',
+                'id' => $subscriptionId,
+            ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'bad',
                 'result' => $e->getMessage(),
             ]);
         }
-
-        return response()->json([
-            'status' => 'ok',
-        ]);
-
     }
 
 }
